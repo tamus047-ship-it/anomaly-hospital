@@ -3,7 +3,7 @@ async function generate() {
   if (!text.trim()) return;
 
   const response = await fetch(
-    "https://api.elevenlabs.io/v1/text-to-speech/CeAjv3teQ7WvtV4vyRFm/stream",
+    "https://api.elevenlabs.io/v1/text-to-speech/CeAjv3teQ7WvtV4vyRFm",
     {
       method: "POST",
       headers: {
@@ -28,14 +28,19 @@ async function generate() {
   const audioURL = URL.createObjectURL(audioBlob);
 
   document.getElementById("audio").src = audioURL;
-  addToHistory(text, audioURL);
+
+  addToHistory(text, audioBlob);
 }
 
-function addToHistory(text, audioURL) {
+function addToHistory(text, audioBlob) {
   const historyDiv = document.getElementById("history");
+
+  const audioURL = URL.createObjectURL(audioBlob);
 
   const item = document.createElement("div");
   item.className = "history-item";
+
+  const downloadURL = URL.createObjectURL(audioBlob);
 
   item.innerHTML = `
     <div style="flex:1;">
@@ -44,7 +49,7 @@ function addToHistory(text, audioURL) {
     <div>
       <audio controls src="${audioURL}"></audio>
       <br>
-      <a href="${audioURL}" download="banowy_voice.wav">Download</a>
+      <a href="${downloadURL}" download="banowy_voice.wav">Download</a>
     </div>
   `;
 

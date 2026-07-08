@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Banowy Shared Voice</title>
+  <style>
+    body { background:#111; color:#fff; font-family:Arial; text-align:center; padding-top:40px; }
+    textarea { width:80%; height:150px; background:#222; color:#fff; border:none; padding:10px; border-radius:8px; }
+    button { margin-top:20px; padding:12px 20px; font-size:18px; background:#4a6cf7; border:none; border-radius:8px; color:#fff; cursor:pointer; }
+    audio { margin-top:20px; width:80%; }
+  </style>
+</head>
+<body>
+
+  <h1>Banowy Shared Voice</h1>
+
+  <textarea id="text" placeholder="Write your script here..."></textarea>
+  <br>
+  <button onclick="generate()">Generate</button>
+
+  <audio id="player" controls></audio>
+
+  <script>
+    async function generate() {
+      const text = document.getElementById("text").value;
+
+      const response = await fetch("/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text })
+      });
+
+      if (!response.ok) {
+        alert("Error: " + response.status);
+        return;
+      }
+
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+
+      const player = document.getElementById("player");
+      player.src = url;
+      player.play();
+    }
+  </script>
+
+</body>
+</html>

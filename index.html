@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Banowy New Voice Generator</title>
+  <title>Banowy Voice Generator</title>
   <style>
     body {
       background: #111;
@@ -10,7 +10,6 @@
       font-family: Arial, sans-serif;
       display: flex;
       justify-content: center;
-      align-items: flex-start;
       padding-top: 40px;
     }
     .container {
@@ -42,7 +41,9 @@
       border-radius: 8px;
       cursor: pointer;
     }
-    button:hover { background: #3a57d8; }
+    button:hover {
+      background: #3a57d8;
+    }
     .history {
       margin-top: 30px;
       text-align: left;
@@ -57,12 +58,14 @@
       align-items: center;
       gap: 10px;
     }
-    .history-item audio { width: 220px; }
+    .history-item audio {
+      width: 220px;
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Banowy New Voice Generator</h1>
+    <h1>Banowy Voice Generator</h1>
 
     <textarea id="text" placeholder="Write your English script here..."></textarea>
     <button onclick="generate()">Generate</button>
